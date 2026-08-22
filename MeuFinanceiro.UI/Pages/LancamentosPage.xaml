@@ -1,0 +1,59 @@
+<Page
+    x:Class="MeuFinanceiro.UI.Pages.LancamentosPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:local="using:MeuFinanceiro.UI.Pages"
+    xmlns:converters="using:MeuFinanceiro.UI.Converters"
+    xmlns:models="using:MeuFinanceiro.UI.Models">
+
+    <Page.Resources>
+        <converters:DateToStringConverter x:Key="DateConverter"/>
+        <converters:CurrencyConverter x:Key="CurrencyConverter"/>
+        <converters:TipoPagamentoToStringConverter x:Key="TipoPagamentoConverter"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Spacing="12" Margin="12,12,12,8">
+            <CalendarDatePicker x:Name="dataInicioPicker" PlaceholderText="Data início"/>
+            <CalendarDatePicker x:Name="dataFimPicker" PlaceholderText="Data fim"/>
+            <Button Content="Filtrar" Command="{x:Bind ViewModel.LoadCommand}"/>
+            <Button Content="Adicionar" Command="{x:Bind ViewModel.AddCommand}"/>
+            <Button Content="Exportar Excel" Command="{x:Bind ViewModel.ExportCommand}"/>
+        </StackPanel>
+
+        <Pivot Grid.Row="1" Margin="12,0"
+               ItemsSource="{x:Bind ViewModel.Abas, Mode=OneWay}">
+            <Pivot.HeaderTemplate>
+                <DataTemplate x:DataType="models:AbaLancamento">
+                    <TextBlock Text="{x:Bind Nome}" />
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <Pivot.ItemTemplate>
+                <DataTemplate x:DataType="models:AbaLancamento">
+                    <Grid>
+                        <controls:DataGrid
+                            AutoGenerateColumns="False"
+                            IsReadOnly="True"
+                            ItemsSource="{x:Bind Transacoes}"
+                            RightTapped="DataGrid_RightTapped">
+                            <controls:DataGrid.Columns>
+                                <controls:DataGridTextColumn Header="Data" Binding="{Binding Data, Converter={StaticResource DateConverter}}" />
+                                <controls:DataGridTextColumn Header="Valor" Binding="{Binding Valor, Converter={StaticResource CurrencyConverter}}" />
+                                <controls:DataGridTextColumn Header="Banco" Binding="{Binding Banco.Nome}" />
+                                <controls:DataGridTextColumn Header="Categoria" Binding="{Binding Categoria.Nome}" />
+                                <controls:DataGridTextColumn Header="Tipo de Pagamento" Binding="{Binding TipoPagamento, Converter={StaticResource TipoPagamentoConverter}}" />
+                                <controls:DataGridTextColumn Header="Observação" Binding="{Binding Observacao}" />
+                            </controls:DataGrid.Columns>
+                        </controls:DataGrid>
+                    </Grid>
+                </DataTemplate>
+            </Pivot.ItemTemplate>
+        </Pivot>
+    </Grid>
+</Page>

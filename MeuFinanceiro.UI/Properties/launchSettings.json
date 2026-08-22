@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MeuFinanceiro.UI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MeuFinanceiro.UI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

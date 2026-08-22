@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="MeuFinanceiro.Core/MeuFinanceiro.Core.csproj" />
+  <Project Path="MeuFinanceiro.Infrastructure/MeuFinanceiro.Infrastructure.csproj" />
+  <Project Path="MeuFinanceiro.UI/MeuFinanceiro.UI.csproj">
+    <Platform Project="x64" />
+    <Deploy />
+  </Project>
+</Solution>

@@ -1,0 +1,49 @@
+<Window
+    x:Class="MeuFinanceiro.UI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MeuFinanceiro.UI"
+    Title="Meu Financeiro">
+
+    <NavigationView x:Name="NavView"
+                    PaneDisplayMode="LeftCompact"
+                    IsBackButtonVisible="Collapsed"
+                    IsSettingsVisible="False"
+                    SelectionChanged="NavView_SelectionChanged">
+        <NavigationView.MenuItems>
+            <NavigationViewItem Content="Lançamentos" Tag="lancamentos">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE71D;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+
+            <NavigationViewItem Content="Categorias" Tag="categorias">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE8A9;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+
+            <NavigationViewItem Content="Bancos" Tag="bancos">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE825;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+
+            <NavigationViewItemSeparator/>
+
+            <NavigationViewItem Content="Resumo por Banco" Tag="resumo_banco">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE9D9;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+
+            <NavigationViewItem Content="Resumo Mensal" Tag="resumo_mensal">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE787;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+        </NavigationView.MenuItems>
+
+        <Frame x:Name="ContentFrame"/>
+    </NavigationView>
+</Window>
